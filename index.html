@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AirCanvas Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <header class="topbar">
+      <a class="brand" href="#">
+        <span class="brand-icon">✳</span>
+        AirCanvas <span class="brand-light">STUDIO</span>
+      </a>
+
+      <span class="status-pill">
+        <span class="status-dot"></span>
+        Canvas ready
+      </span>
+    </header>
+
+    <main>
+      <!-- INTRODUCTION -->
+      <section class="intro">
+        <p class="eyebrow">A LITTLE SPACE FOR CREATIVITY</p>
+
+        <h1>
+          Draw in the air. Sketch with a click.<br>
+          <em>Create however inspiration moves you.</em>
+        </h1>
+
+        <p class="intro-text">
+          From hand gestures to mouse strokes, your canvas is yours to explore.
+        </p>
+
+        <div class="note">
+          <span class="note-icon">✦</span>
+          <p>
+            <strong>Ready when inspiration strikes</strong><br>
+            Pick a color. Find your flow. Create your way.
+          </p>
+        </div>
+      </section>
+
+      <!-- DRAWING STUDIO -->
+      <section class="studio">
+        <div class="toolbar">
+          
+        <div class="control-group">
+          <label>DRAWING MODE</label>
+
+          <div class="tool-buttons">
+          <button
+          type="button"
+          class="tool-button active"
+          id="mouseModeBtn"
+          aria-pressed="true"
+          >🐁 Mouse</button>
+
+          <button
+          type="button"
+          class="tool-button"
+          id="airModeBtn"
+          aria-pressed="false"
+          >🪄 Air Pen</button>
+          </div>
+        </div>
+
+          <div class="control-group">
+            <label>TOOL</label>
+
+            <div class="tool-buttons">
+              <button
+                class="tool-button active"
+                id="penBtn"
+                data-tool="pen"
+                aria-pressed="true"
+              >𓂃🖊 Pen</button>
+
+              <button
+                class="tool-button"
+                id="eraserBtn"
+                data-tool="eraser"
+                aria-pressed="false"
+              >🧹 Eraser</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="colorPicker">BRUSH COLOR</label>
+
+            <div class="color-control">
+              <input
+                type="color"
+                id="colorPicker"
+                value="#7166F5"
+              >
+              <span id="colorValue">#7166F5</span>
+            </div>
+          </div>
+
+          <div class="control-group brush-group">
+            <label for="brushSize">
+              BRUSH SIZE <span id="brushValue">6 px</span>
+            </label>
+
+            <input
+              type="range"
+              id="brushSize"
+              min="1"
+              max="35"
+              value="6"
+            >
+          </div>
+
+          <div class="toolbar-actions">
+            <button
+              id="undoBtn"
+              class="secondary-button"
+              disabled
+            >↶ Undo</button>
+
+            <button
+              id="clearBtn"
+              class="secondary-button"
+            >Clear</button>
+
+            <button
+              id="saveBtn"
+              class="primary-button"
+            >↓ Save PNG</button>
+          </div>
+        </div>
+
+        <!-- DRAWING CANVAS -->
+        <section class="canvas-panel" id="canvasPanel">
+          <div class="canvas-header">
+            <span>
+              <span class="canvas-dot"></span>
+              YOUR CANVAS
+            </span>
+
+            <button
+              id="fullscreenBtn"
+              class="text-button"
+            >⛶ Fullscreen</button>
+          </div>
+
+          <div class="canvas-wrap" id="canvasWrap">
+            <canvas
+              id="drawingCanvas"
+              aria-label="Drawing canvas"
+            ></canvas>
+
+            <div class="empty-state" id="emptyState">
+              <div class="empty-symbol">✳</div>
+              <h2>Your canvas is empty</h2>
+              <p>Click and drag to make your first stroke.</p>
+            </div>
+          </div>
+
+          <div class="air-cursor" id="airCursor" hidden></div>
+
+          <div class="canvas-footer">
+            <span id="statusText">Ready when you are.</span>
+
+            <span class="keyboard-hint">
+              TIP: Draw, experiment, have fun.
+            </span>
+          </div>
+        </section>
+      </section>
+
+      <!-- NEW: CAMERA SETUP -->
+      <section class="camera-card">
+
+        <div class="camera-heading">
+          <div>
+            <p class="eyebrow">CAMERA SETUP</p>
+
+            <h2>Meet your air pointer.</h2>
+
+            <p>
+              Let's connect your webcam before adding hand tracking.
+            </p>
+          </div>
+
+          
+          <span class="status-pill camera-off" id="cameraBadge">
+          <span class="status-dot" id="cameraBadgeDot"></span>
+          <span id="cameraBadgeText">Camera off</span>
+          </span>
+
+        </div>
+
+        <div class="camera-layout">
+
+          <!-- LIVE CAMERA PREVIEW -->
+          <div class="camera-preview" id="cameraPreview">
+            <video
+              id="webcam"
+              autoplay
+              playsinline
+              muted
+            ></video>
+
+            <div
+              class="camera-placeholder"
+              id="cameraPlaceholder"
+            >
+              <span>📷</span>
+              <p>Your camera preview will appear here.</p>
+            </div>
+          </div>
+
+          <!-- CAMERA CONTROLS -->
+          <div class="camera-controls">
+            <h3>Webcam controls</h3>
+
+            <p id="cameraStatus">
+              Your camera is off. Start it when you're ready.
+            </p>
+
+            <button
+              id="startCameraBtn"
+              class="primary-button"
+            >
+              Start camera
+            </button>
+
+            <button
+              id="stopCameraBtn"
+              class="secondary-button"
+              disabled
+            >
+              Stop camera
+            </button>
+
+            <p class="camera-tip">
+              Tip: Sit facing a light source so your hand is easy to see.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+    <p>A LITTLE MAGIC IN EVERY STROKE <span>✦</span> AIRCANVAS STUDIO</p>
+    <small>© 2026 Madhu Vyshnavi Somisetty · AirCanvas Studio. All rights reserved.</small>
+    </footer>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>
